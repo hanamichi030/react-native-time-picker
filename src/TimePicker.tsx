@@ -47,6 +47,9 @@ const TWELVE_LIST = new Array(12)
   .fill(0)
   .map((_, index) => (index + 1 < 10 ? `0${index + 1}` : `${index + 1}`));
 const SIXTY_LIST = createNumberList(60);
+const MINS_LIST_15 = [
+  '00', '15', '30', '45'
+]
 
 interface Props {
   value?: number | null; // milliseconds of date
@@ -71,15 +74,17 @@ export default function TimePicker({
     (value ?? Date.now()) % MILLISECONDS_PER_DAY
   );
   const [hour, setHour] = useState(Math.floor(current / MILLISECONDS_PER_HOUR));
-  const [minute, setMinute] = useState(
-    Math.floor(current / MILLISECONDS_PER_MINUTE) % 60
-  );
+  // const [minute, setMinute] = useState(
+  //   Math.floor(current / MILLISECONDS_PER_MINUTE) % 60
+  // );
+  const [minute, setMinute] = useState(Math.floor((Math.floor(current / MILLISECONDS_PER_MINUTE) % 60) / 15) * 15);
   const [second, setSecond] = useState(Math.floor(current / 1000) % 60);
 
   const changeTimeValue = useCallback(
     (type: 'hour' | 'minute' | 'second', newValue: number) => {
       let newHour = hour;
-      let newMinute = minute;
+      // let newMinute = minute;
+      let newMinute = Math.floor(minute / 15) * 15;
       let newSecond = second;
       switch (type) {
         case 'hour':
@@ -156,7 +161,7 @@ export default function TimePicker({
               <Wheel
                 key={'min'}
                 value={minute < 10 ? `0${minute}` : `${minute}`}
-                values={SIXTY_LIST}
+                values={MINS_LIST_15}
                 setValue={(newValue) =>
                   changeTimeValue('minute', parseInt(newValue))
                 }
