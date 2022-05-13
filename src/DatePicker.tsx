@@ -63,7 +63,7 @@ export default function DatePicker({
      const changeDateValue = useCallback((year: number, month: number, date: number) => {
       const newDate = new Date();
       newDate.setFullYear(year);
-      newDate.setMonth(month);
+      newDate.setMonth(month - 1);
       newDate.setDate(date);
       onChange(newDate);
      }, [onChange])
@@ -79,8 +79,14 @@ export default function DatePicker({
                     changeDateValue(parseInt(newValue, 10), month, day)
                   }
                   onScroll={onScroll}
-                  textStyle={textStyle}
+                  textStyle={{
+                    ...textStyle,
+                  }}
                   {...wheelProps}
+                  containerStyle={{
+                    ...wheelProps.containerStyle,
+                    width: 45,
+                  }}
                   />
                 );
               
