@@ -185,7 +185,7 @@ export default function TimePicker({
               />
             );
           default:
-            return <Text style={textStyle}>{timeType}</Text>;
+            return <Text style={textStyle} key={`label-${timeType}`}>{timeType}</Text>;
         }
       })}
     </View>

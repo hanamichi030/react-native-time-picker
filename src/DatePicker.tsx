@@ -75,10 +75,10 @@ export default function DatePicker({
             switch (dateType) {
               case DateType.year:
                 return (
-                  <Wheel key='year-wheel-pick' value={`${year}`} values={YEAR_OPTIONS} setValue={(newValue) => 
+                  <Wheel key='year-wheel-pick'  value={`${year}`} values={YEAR_OPTIONS} setValue={(newValue) => 
                     changeDateValue(parseInt(newValue, 10), month, day)
                   }
-                  onScrol={onScroll}
+                  onScroll={onScroll}
                   textStyle={textStyle}
                   {...wheelProps}
                   />
@@ -86,7 +86,7 @@ export default function DatePicker({
               
               case DateType.month:
                 return (
-                  <Wheel key='month-wheel-pick' value={`${month}`} values={
+                  <Wheel key='month-wheel-pick'  value={`${month}`} values={
                     createNumberList(12)
                   } setValue={(newValue) => changeDateValue(year, parseInt(newValue, 10), day)}
                   onScroll={onScroll}
@@ -104,7 +104,9 @@ export default function DatePicker({
                   {...wheelProps} />
                 );
               default:
-                return <Text style={textStyle}>{dateType}</Text>
+                return <Text style={textStyle}
+                  key={`label-${dateType}`}
+                >{dateType}</Text>
             }
           })
         }
