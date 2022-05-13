@@ -30,7 +30,7 @@ const Styles = StyleSheet.create({
 });
 
 function createNumberList(num: number) {
-    return new Array(num).fill(0).map((_, index) => `${index}`);
+    return new Array(num).fill(0).map((_, index) => `${index + 1}`);
 }
 
 const YEAR_OPTIONS = new Array(50).fill(0).map((_, index) => `${2001 + index}`);
